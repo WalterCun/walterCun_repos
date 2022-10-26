@@ -1,55 +1,42 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete, ParseIntPipe, Put } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
 import { AdminOrgService } from './admin-org.service';
 import { CreateAdminOrgDto } from './dto/create-admin-org.dto';
 import { UpdateAdminOrgDto } from './dto/update-admin-org.dto';
 
-@Controller('admin-org/create')
-export class AdminOrgControllerCreate {
+@ApiTags('Ejercicio #2: Administracion de organizaciones')
+@Controller('admin-org')
+export class AdminOrgController {
   constructor(private readonly service: AdminOrgService) {}
 
-  @Post()
+  @Post('crear/')
   create(@Body() createAdminOrgDto: CreateAdminOrgDto) {
     return this.service.createNewOrg(createAdminOrgDto);
   }
-}
 
-@Controller('admin-org/actualizar')
-export class AdminOrgControllerUpdate{
-  constructor(private readonly service: AdminOrgService) {}
-
-  @Patch(':orgId')
+  @Patch('actualizar/:orgId')
   path(@Param('orgId') id: string, @Body() newData: UpdateAdminOrgDto) {
     return this.service.updateByIdOrg(+id, newData);
   }
 
-  @Put(':orgId')
+  @Put('actualizar/:orgId')
   update(@Param('orgId', ParseIntPipe) orgId: number, @Body() newData: UpdateAdminOrgDto) {
     return this.service.updateByIdOrg(orgId, newData);
   }
 
-}
-
-@Controller('admin-org/obtener')
-export class AdminOrgControllerGet{
-  constructor(private readonly service: AdminOrgService) {}
-  @Get()
+  @Get('obtener/')
   findAll() {
     return this.service.searchAllOrg();
   }
 
-  @Get(':orgId')
+  @Get('obtener/:orgId')
   findById(@Param('orgId', ParseIntPipe) orgId: number) {
     return this.service.searchByIdOrg(orgId);
   }
 
-}
-
-@Controller('admin-org/eliminar')
-export class AdminOrgControllerDelete{
-  constructor(private readonly service: AdminOrgService) {}
-
-  @Delete(':orgId')
+  @Delete('borrar/:orgId')
   delete(@Param('orgId', ParseIntPipe) orgId: number) {
     return this.service.deleteByIdOrg(orgId);
   }
+
 }

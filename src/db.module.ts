@@ -4,6 +4,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 
 import configuration from './config/default';
 
+// Generacion de variables globales que cargan mediante las variables de entorno los datos de ejecucion
 @Global()
 @Module({
   imports: [

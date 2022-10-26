@@ -1,16 +1,13 @@
 import { Module } from '@nestjs/common';
 import { AdminOrgService } from './admin-org.service';
-import { AdminOrgControllerCreate, AdminOrgControllerDelete, AdminOrgControllerGet, AdminOrgControllerUpdate } from './admin-org.controller';
-import { Organizaciones } from './entities/admin-org.entity';
+import { AdminOrgController } from './admin-org.controller';
+import { Organizaciones } from './entities/organizaciones.entity';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
 @Module({
   imports:[TypeOrmModule.forFeature([Organizaciones])],
   controllers: [
-    AdminOrgControllerCreate,
-    AdminOrgControllerUpdate, 
-    AdminOrgControllerGet,
-    AdminOrgControllerDelete, 
+    AdminOrgController, 
   ],
   providers: [AdminOrgService],
   exports: [AdminOrgService]

@@ -22,7 +22,6 @@ async function bootstrap() {
     .setTitle('Ejercicio practico Backend Developer')
     .setDescription('Ejercicio para evaluar el conocimiento para resolucion de problemas informativos')
     .setVersion('1.0')
-    .addTag('eval')
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('/', app, document)

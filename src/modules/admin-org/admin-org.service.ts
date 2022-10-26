@@ -3,7 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateAdminOrgDto } from './dto/create-admin-org.dto';
 import { UpdateAdminOrgDto } from './dto/update-admin-org.dto';
-import { Organizaciones } from './entities/admin-org.entity';
+import { Organizaciones } from './entities/organizaciones.entity';
 
 @Injectable()
 export class AdminOrgService {
