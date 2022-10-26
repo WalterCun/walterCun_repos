@@ -1,14 +1,16 @@
 import { Module } from '@nestjs/common';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { FakeController } from 'src/apps/fake/apifake.controller';
-import { AppDataSource } from 'src/data-source';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
+
+// import { TypeOrmModule } from '@nestjs/typeorm';
+
+import { AdminModule } from 'src/apps/admin/admin.module';
+import { FakeApiModule } from 'src/apps/fake/fake.module';
+
+
 
 @Module({
-  imports: [],
-  controllers: [AppController, FakeController],
-  providers: [AppService],
+  imports: [
+    FakeApiModule,
+    AdminModule
+  ],
 })
-export class AppModule {
-}
+export class AppModule {}

@@ -35,6 +35,17 @@ $ npm install
 ## Running the app
 
 ```bash
+
+# En Windows
+$ set DATABASE_URL=[urldatabase] 
+$ set USER_DB=[user]
+$ set PASS_DB=[pass]
+
+# En Linux
+$ export DATABASE_URL=[urldatabase] 
+$ export USER_DB=[user]
+$ export PASS_DB=[pass]
+
 # development
 $ npm run start
 
