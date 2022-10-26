@@ -1,16 +1,4 @@
-import {
-  Controller,
-  Get,
-  Param,
-  HttpCode,
-  HttpStatus,
-  ParseIntPipe,
-  StreamableFile,
-  Res
-} from '@nestjs/common';
-
-import { createReadStream } from 'fs';
-
+import { Controller, Get, Param, HttpCode, HttpStatus, ParseIntPipe, } from '@nestjs/common';
 
 import { ApiTags } from '@nestjs/swagger';
 import { RepositoriesService } from './submodules/repositorios/services/repositories.service';
@@ -25,5 +13,5 @@ export class RepositoriesMetricController {
   getMetrics(@Param('tribuId', ParseIntPipe) tribuId: number) {
     return this.repositoriesService.getMetrics(tribuId);
   }
-  
+
 }

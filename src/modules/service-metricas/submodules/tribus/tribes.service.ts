@@ -28,14 +28,14 @@ export class TribesService {
   findAll() {
     //return this.organizations;
     return this.tribeRepo.find({
-      relations: ['organization','repositories'],
+      relations: ['organization','repos'],
     });
   }
 
   async findOne(id_tribe: number) {
     const tribe = await this.tribeRepo.findOne({
       where:{id_tribe: id_tribe},
-      relations:['organization','repositories']
+      relations:['organization','repos']
     });
 
     return tribe;

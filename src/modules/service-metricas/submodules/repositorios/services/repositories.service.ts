@@ -5,7 +5,7 @@ import { HttpModule, HttpService } from '@nestjs/axios';
 import * as fs from 'fs';
 
 
-import { Repositorios} from '../entities/repositories.entity'
+import { Repositorios } from '../entities/repositories.entity'
 import { CreateRepositoryDto, UpdateRepositoryDto } from '../dtos/repositories.dto';
 
 import { TribesService } from '../../tribus/tribes.service'
@@ -80,7 +80,7 @@ export class RepositoriesService {
       { code: 605, state: "En espera" },
       { code: 606, state: "Aprobado" },
     ]
-//MOCK_API=http://localhost:3004/repositories
+
     try {
       const APIMock: any = await this.httpService.get(process.env.MOCK_API).toPromise()
       const dataMock: any = APIMock.data
@@ -96,17 +96,9 @@ export class RepositoriesService {
   async getMetrics(idTribu: number) {
 
     interface ModelResponse {
-      id: number;
-      name: string;
-      tribe: string;
-      organization: string;
-      coverage: string;
-      codeSmells: number;
-      bugs: number;
-      vulnerabilities: number;
-      hotspots: number;
-      verificationState: string;
-      state: string;
+      id: number; name: string; tribe: string; organization: string;
+      coverage: string; codeSmells: number; bugs: number; vulnerabilities: number; hotspots: number;
+      verificationState: string; state: string;
     }
 
     const stateCode = [
@@ -122,8 +114,8 @@ export class RepositoriesService {
 
 
     const tribe = await this.tribesService.findOne(idTribu);
-      console.log(tribe);
-      
+    console.log(tribe);
+
 
     if (!tribe) {
       throw new NotFoundException(`La Tribu no se encuentra registrada`);
