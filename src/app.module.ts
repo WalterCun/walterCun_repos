@@ -2,6 +2,7 @@ import { Module } from "@nestjs/common";
 import { ConfigModule } from '@nestjs/config'
 import configuration from './config/default';
 import { DBModule } from "./db.module";
+import { AdminOrgModule } from "./modules/admin-org/admin-org.module";
 
 import { FakeApiModule } from "./modules/fakeapi/fakeapi.module";
 
@@ -12,7 +13,8 @@ import { FakeApiModule } from "./modules/fakeapi/fakeapi.module";
             load: [configuration],
             isGlobal: true,
         }),
-        DBModule
+        DBModule,
+        AdminOrgModule,
     ],
     controllers: [],
     providers: []

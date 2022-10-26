@@ -1,26 +1,38 @@
 import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 import { CreateAdminOrgDto } from './dto/create-admin-org.dto';
 import { UpdateAdminOrgDto } from './dto/update-admin-org.dto';
+import { Organizaciones } from './entities/admin-org.entity';
 
 @Injectable()
 export class AdminOrgService {
-  create(createAdminOrgDto: CreateAdminOrgDto) {
-    return 'This action adds a new adminOrg';
+
+  constructor(
+    @InjectRepository(Organizaciones) private organizacionesRepo:Repository<Organizaciones>,
+  ){}
+  
+  // Metodo de creacion de Organizacion
+  createNewOrg(data: CreateAdminOrgDto) {
+    return this.organizacionesRepo.save(data);
   }
 
-  findAll() {
-    return `This action returns all adminOrg`;
+  // Metodo para traer las organizaciones existentes
+  searchAllOrg() {
+    return this.organizacionesRepo.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} adminOrg`;
+  searchByIdOrg(id: number) {
+    return this.organizacionesRepo.findOneBy({id: id});
   }
 
-  update(id: number, updateAdminOrgDto: UpdateAdminOrgDto) {
-    return `This action updates a #${id} adminOrg`;
+  async updateByIdOrg(id: number, newdata: UpdateAdminOrgDto) {
+    const org = await this.organizacionesRepo.findOneBy({id: id});
+    this.organizacionesRepo.merge(org, newdata)
+    return this.organizacionesRepo.findOneBy({id: id});
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} adminOrg`;
+  deleteByIdOrg(id: number) {
+    return this.organizacionesRepo.delete(id);
   }
 }
