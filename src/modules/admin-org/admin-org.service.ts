@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateAdminOrgDto } from './dto/create-admin-org.dto';
@@ -22,14 +22,23 @@ export class AdminOrgService {
     return this.organizacionesRepo.find();
   }
 
-  searchByIdOrg(id: number) {
-    return this.organizacionesRepo.findOneBy({id: id});
+  async searchByIdOrg(id: number) {
+    const org = await this.organizacionesRepo.findOneBy({id:id});
+    if (org == null) {
+      throw new NotFoundException(`La organizacion #${id} no se encuentra`);
+    }
+
+    return org;
   }
 
   async updateByIdOrg(id: number, newdata: UpdateAdminOrgDto) {
     const org = await this.organizacionesRepo.findOneBy({id: id});
+    if (org == null) {
+      throw new NotFoundException(`La organizacion #${id} no se encuentra`);
+    }
+
     this.organizacionesRepo.merge(org, newdata)
-    return this.organizacionesRepo.findOneBy({id: id});
+    return this.organizacionesRepo.save(org);
   }
 
   deleteByIdOrg(id: number) {

@@ -9,8 +9,9 @@ import { TypeOrmModule } from '@nestjs/typeorm';
   controllers: [
     AdminOrgControllerCreate,
     AdminOrgControllerUpdate, 
+    AdminOrgControllerGet,
     AdminOrgControllerDelete, 
-    AdminOrgControllerGet],
+  ],
   providers: [AdminOrgService],
   exports: [AdminOrgService]
 })

@@ -36,6 +36,12 @@ export class AdminOrgControllerGet{
   findAll() {
     return this.service.searchAllOrg();
   }
+
+  @Get(':orgId')
+  findById(@Param('orgId', ParseIntPipe) orgId: number) {
+    return this.service.searchByIdOrg(orgId);
+  }
+
 }
 
 @Controller('admin-org/eliminar')
@@ -43,7 +49,7 @@ export class AdminOrgControllerDelete{
   constructor(private readonly service: AdminOrgService) {}
 
   @Delete(':orgId')
-  delete(@Param('orgId', ParseIntPipe) organizationId: number) {
-    return this.service.deleteByIdOrg(organizationId);
+  delete(@Param('orgId', ParseIntPipe) orgId: number) {
+    return this.service.deleteByIdOrg(orgId);
   }
 }
