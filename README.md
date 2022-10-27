@@ -37,14 +37,20 @@ $ npm install
 ```bash
 
 # En Windows
-$ set DATABASE_URL=[urldatabase] 
-$ set USER_DB=[user]
-$ set PASS_DB=[pass]
+$ set DB_USER=[user]
+$ set DB_PASSWORD=[pass]
+$ set DB_HOST=[urldatabase] 
+$ set DB_PORT=[port]
+$ set DB_CLUSTER=[cluster]
+$ set DB_NAME=[namedb]
 
 # En Linux
-$ export DATABASE_URL=[urldatabase] 
-$ export USER_DB=[user]
-$ export PASS_DB=[pass]
+$ export DB_USER=[user]
+$ export DB_PASSWORD=[pass]
+$ export DB_HOST=[urldatabase] 
+$ export DB_PORT=[port]
+$ export DB_CLUSTER=[cluster]
+$ export DB_NAME=[namedb]
 
 # development
 $ npm run start
