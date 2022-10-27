@@ -1,4 +1,4 @@
-import { ApiProperty } from "@nestjs/swagger";
+import { ApiProduces, ApiProperty, PartialType } from "@nestjs/swagger";
 import { IsNotEmpty, IsNumber, IsPositive, IsString } from "class-validator";
 
 export class CreateAdminOrgDto {
@@ -13,3 +13,6 @@ export class CreateAdminOrgDto {
     @IsPositive()
     readonly status: number;
 }
+
+@ApiProduces()
+export class UpdateAdminOrgDto extends PartialType(CreateAdminOrgDto) {}
