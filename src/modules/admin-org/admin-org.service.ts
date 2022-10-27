@@ -1,8 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { CreateAdminOrgDto } from './dto/create-admin-org.dto';
-import { UpdateAdminOrgDto } from './dto/update-admin-org.dto';
+import { CreateAdminOrgDto, UpdateAdminOrgDto } from './dto/org.dto';
 import { Organizaciones } from './entities/organizaciones.entity';
 
 @Injectable()

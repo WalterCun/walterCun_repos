@@ -22,7 +22,7 @@ export class Metricas {
   @Column({ type: 'int' })
   code_smells: number;
 
-  @OneToOne(() => Repositorios, (repository) => repository.metrics) // specify inverse side as a second parameter
+  @OneToOne(() => Repositorios, (repository) => repository.metricas) // specify inverse side as a second parameter
   repository: Repositorios
 
 }

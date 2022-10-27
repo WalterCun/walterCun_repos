@@ -11,9 +11,9 @@ import { RepositoriesService } from "./submodules/repositorios/services/reposito
 export class MetricasReporteriaController {
   constructor(private repositoriesService: RepositoriesService) { }
 
-  @Get('export/:tribuId')
-  async getFile(@Param('tribuId', ParseIntPipe) tribuId: number,@Res({ passthrough: true }) res: Response): Promise<StreamableFile> {
-    await this.repositoriesService.generateReport(tribuId)
+  @Get('export/:id')
+  async getFile(@Param('id', ParseIntPipe) id: number,@Res({ passthrough: true }) res: Response): Promise<StreamableFile> {
+    await this.repositoriesService.generateReport(id)
     const file = createReadStream(join(process.cwd(), 'report.csv'));
     res.set({
       'Content-Type': 'text/plain',

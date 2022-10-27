@@ -7,32 +7,32 @@ import { ApiTags } from '@nestjs/swagger';
 @ApiTags('CRUD - Repositorios')
 @Controller('repositorios')
 export class RepositoriesController {
-  constructor(private repositoriesService: RepositoriesService) { }
+  constructor(private reposService: RepositoriesService) { }
 
   @Get()
   getRepositories() {
-    return this.repositoriesService.findAll();
+    return this.reposService.findAll();
   }
 
-  @Get(':repoId')
+  @Get(':id')
   @HttpCode(HttpStatus.ACCEPTED)
-  getOne(@Param('repoId', ParseIntPipe) repoId: number) {
-    return this.repositoriesService.findOne(repoId);
+  getOne(@Param('id', ParseIntPipe) id: number) {
+    return this.reposService.findOne(id);
   }
 
   @Post()
-  create(@Body() payload: CreateRepositoryDto) {
-    return this.repositoriesService.create(payload);
+  create(@Body() data: CreateRepositoryDto) {
+    return this.reposService.create(data);
   }
 
-  @Put(':repoId')
-  update(@Param('repoId', ParseIntPipe) repoId: number, @Body() payload: UpdateRepositoryDto) {
-    return this.repositoriesService.update(repoId, payload);
+  @Put(':id')
+  update(@Param('id', ParseIntPipe) id: number, @Body() data: UpdateRepositoryDto) {
+    return this.reposService.update(id, data);
   }
 
-  @Delete(':repoId')
-  delete(@Param('repoId', ParseIntPipe) repoId: number) {
-    return this.repositoriesService.remove(repoId);
+  @Delete(':id')
+  delete(@Param('id', ParseIntPipe) id: number) {
+    return this.reposService.remove(id);
   }
 
 }

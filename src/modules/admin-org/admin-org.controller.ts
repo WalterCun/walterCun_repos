@@ -1,8 +1,7 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete, ParseIntPipe, Put } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { AdminOrgService } from './admin-org.service';
-import { CreateAdminOrgDto } from './dto/create-admin-org.dto';
-import { UpdateAdminOrgDto } from './dto/update-admin-org.dto';
+import { CreateAdminOrgDto, UpdateAdminOrgDto } from './dto/org.dto';
 
 @ApiTags('Ejercicio #2: Administracion de organizaciones')
 @Controller('admin-org')
@@ -14,14 +13,14 @@ export class AdminOrgController {
     return this.service.createNewOrg(createAdminOrgDto);
   }
 
-  @Patch('actualizar/:orgId')
-  path(@Param('orgId') id: string, @Body() newData: UpdateAdminOrgDto) {
+  @Patch('actualizar/:id')
+  path(@Param('id') id: string, @Body() newData: UpdateAdminOrgDto) {
     return this.service.updateByIdOrg(+id, newData);
   }
 
-  @Put('actualizar/:orgId')
-  update(@Param('orgId', ParseIntPipe) orgId: number, @Body() newData: UpdateAdminOrgDto) {
-    return this.service.updateByIdOrg(orgId, newData);
+  @Put('actualizar/:id')
+  update(@Param('id', ParseIntPipe) id: number, @Body() newData: UpdateAdminOrgDto) {
+    return this.service.updateByIdOrg(id, newData);
   }
 
   @Get('obtener/')
@@ -29,14 +28,14 @@ export class AdminOrgController {
     return this.service.searchAllOrg();
   }
 
-  @Get('obtener/:orgId')
-  findById(@Param('orgId', ParseIntPipe) orgId: number) {
-    return this.service.searchByIdOrg(orgId);
+  @Get('obtener/:id')
+  findById(@Param('id', ParseIntPipe) id: number) {
+    return this.service.searchByIdOrg(id);
   }
 
-  @Delete('borrar/:orgId')
-  delete(@Param('orgId', ParseIntPipe) orgId: number) {
-    return this.service.deleteByIdOrg(orgId);
+  @Delete('borrar/:id')
+  delete(@Param('id', ParseIntPipe) id: number) {
+    return this.service.deleteByIdOrg(id);
   }
 
 }

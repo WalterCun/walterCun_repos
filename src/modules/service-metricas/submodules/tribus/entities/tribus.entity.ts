@@ -13,7 +13,7 @@ export class Tribus {
   @Column({ type: 'int' })
   status: number;
 
-  @OneToMany(() => Repositorios, (repos) => repos.tribu)
+  @OneToMany(() => Repositorios, (repos) => repos.tribus)
   repos: Repositorios[]
 
   @ManyToOne(() => Organizaciones, (organization) => organization.tribes)

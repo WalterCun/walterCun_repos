@@ -38,9 +38,9 @@ export class Repositorios {
 
   @OneToOne(() => Metricas,(metrica) => metrica.repository)
   @JoinColumn()
-  metrics: Metricas
+  metricas: Metricas
 
   @ManyToOne(() => Tribus, (tribu) => tribu.repos)
-  tribu: Tribus
+  tribus: Tribus
 
 }

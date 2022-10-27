@@ -15,34 +15,33 @@ import { estadosRep } from 'src/modules/service-metricas/enums/global-enum';
 @Injectable()
 export class RepositoriesService {
   constructor(
-    @InjectRepository(Repositorios) private repositoriesRepo: Repository<Repositorios>,
+    @InjectRepository(Repositorios) private reposRepo: Repository<Repositorios>,
     private tribesService: TribesService,
     private readonly httpService: HttpService
   ) { }
 
 
   async create(data: CreateRepositoryDto) {
-    const newRepository = this.repositoriesRepo.create(data);
+    const newRepository = this.reposRepo.create(data);
     if (data.tribeId) {
       const tribe = await this.tribesService.findOne(data.tribeId);
-      newRepository.tribu = tribe;
+      newRepository.tribus = tribe;
     } else {
       throw new NotFoundException(`tribeId is required`);
     }
-    return this.repositoriesRepo.save(newRepository);
+    return this.reposRepo.save(newRepository);
   }
 
   findAll() {
-    //return this.organizations;
-    return this.repositoriesRepo.find({
-      relations: ['tribe', 'metrics'],
+    return this.reposRepo.find({
+      relations: ['tribus', 'metricas'],
     });
   }
 
   async findOne(id_repository: number) {
-    const repository = await this.repositoriesRepo.findOne({
+    const repository = await this.reposRepo.findOne({
       where: { id_repository: id_repository },
-      relations: ['tribe', 'metrics']
+      relations: ['tribus', 'metricas']
     });
     if (!repository) {
       throw new NotFoundException(`Repository #${id_repository} not found`);
@@ -53,7 +52,7 @@ export class RepositoriesService {
 
 
   async update(id_repository: number, changes: UpdateRepositoryDto) {
-    const repository = await this.repositoriesRepo.findOneBy({
+    const repository = await this.reposRepo.findOneBy({
       id_repository: id_repository
     });
     if (!repository) {
@@ -61,36 +60,35 @@ export class RepositoriesService {
     }
     if (changes.tribeId) {
       const tribe = await this.tribesService.findOne(changes.tribeId);
-      repository.tribu = tribe;
+      repository.tribus = tribe;
     }
 
-    this.repositoriesRepo.merge(repository, changes);
-    return this.repositoriesRepo.save(repository);
+    this.reposRepo.merge(repository, changes);
+    return this.reposRepo.save(repository);
   }
 
   remove(id: number) {
-    return this.repositoriesRepo.delete(id);
+    return this.reposRepo.delete(id);
   }
 
-  async getVerificationState(idRepository: number) {
-    let naturalLanguageState: string = 'No encontrado'
+  async getVerificationState(idRepos: number) {
+    let resp: string = 'No encontrado'
     const verificationCode = [
-      //{ code: 0, state: "No encontrado" },
       { code: 604, state: "Verificado" },
       { code: 605, state: "En espera" },
       { code: 606, state: "Aprobado" },
     ]
 
     try {
-      const APIMock: any = await this.httpService.get(process.env.MOCK_API).toPromise()
+      const APIMock: any = await this.httpService.get('fake/').toPromise()
       const dataMock: any = APIMock.data
-      const searchMock: number = dataMock?.find((repo) => repo.id == idRepository)?.state || 0
-      naturalLanguageState = verificationCode.find((code) => code.code == searchMock)?.state || "No encontrado"
+      const searchMock: number = dataMock?.find((repo) => repo.id == idRepos)?.state || 0
+      resp = verificationCode.find((code) => code.code == searchMock)?.state || "No encontrado"
     } catch (error) {
-      naturalLanguageState = 'NO_API'
+      resp = 'NO_API'
     }
 
-    return naturalLanguageState;
+    return resp;
   }
 
   async getMetrics(idTribu: number) {
@@ -121,18 +119,18 @@ export class RepositoriesService {
       throw new NotFoundException(`La Tribu no se encuentra registrada`);
     }
 
-    const metricas: Repositorios[] = await this.repositoriesRepo.find({
-      relations: ['tribe', 'metrics', 'tribe.organization'],
+    const metricas: Repositorios[] = await this.reposRepo.find({
+      relations: ['tribus', 'metricas', 'tribus.organization'],
       select: {
         id_repository: true,
         name: true,
-        tribu: {
+        tribus: {
           name: true,
           organization: {
             name: true,
           }
         },
-        metrics: {
+        metricas: {
           coverage: true,
           code_smells: true,
           bugs: true,
@@ -144,10 +142,10 @@ export class RepositoriesService {
       },
       where: {
         create_time: Between(dateFrom, dateTo),
-        tribu: {
+        tribus: {
           id_tribe: idTribu,
         },
-        metrics: {
+        metricas: {
           coverage: MoreThan(minCoverage),
         },
         state: estadosRep.ENABLE,
