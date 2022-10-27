@@ -1,34 +1,50 @@
-
+import { IsEnum, IsNotEmpty, IsNumber, IsOptional, IsString } from 'class-validator';
 
 import { ApiProperty, PartialType } from '@nestjs/swagger';
-import { IsEnum, IsNotEmpty, IsNumber, IsOptional, IsString } from 'class-validator';
+
 import { estadosReg, estadosRep } from 'src/modules/service-metricas/enums/global-enum';
 
 export class CreateRepositoryDto {
-  @ApiProperty()
+  @ApiProperty({
+    description: 'Identificacion de la Tribu',
+    required: true,
+  })
   @IsNotEmpty()
   @IsNumber()
-  readonly tribeId : number;
+  readonly tribeId: number;
 
-  @ApiProperty()
+  @ApiProperty({
+    description: 'Nombre de la Tribu',
+    required: true,
+  })
   @IsString()
   @IsNotEmpty()
   readonly name: string;
 
-  @ApiProperty()
+  @ApiProperty({ 
+    description: 'Estado del Repositorio: E=ENABLED, D=DISABLED, A=ARCHIVE',
+    enum: estadosRep,
+    // enumName: 'Estados Repositorio'
+  })
   @IsNotEmpty()
   @IsEnum(estadosRep)
   readonly state: estadosRep;
 
-  @ApiProperty()
+  @ApiProperty({ 
+    description: 'Estado de Registro: A=ACTIVE, I=INACTIVE',
+    enum: estadosReg,
+    // enumName: 'Estados Registro'
+  })
   @IsNotEmpty()
   @IsEnum(estadosReg)
-  readonly status:estadosReg;
+  readonly status: estadosReg;
 
-  @ApiProperty()
+  @ApiProperty({
+    required: false
+  })
   @IsOptional()
-  readonly metricId:number;
+  readonly metricId: number;
 
 }
 
-export class UpdateRepositoryDto extends PartialType(CreateRepositoryDto) {}
+export class UpdateRepositoryDto extends PartialType(CreateRepositoryDto) { }
