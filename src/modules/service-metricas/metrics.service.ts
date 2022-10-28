@@ -26,8 +26,6 @@ export class MetricsService {
     return this.metricsRepo.save(newMetrics);
   }
 
-
-
   findAll() {
     //return this.organizations;
     return this.metricsRepo.find();

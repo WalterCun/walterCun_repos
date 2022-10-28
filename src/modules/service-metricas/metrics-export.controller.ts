@@ -4,12 +4,13 @@ import { Controller, Get, Param, ParseIntPipe, Res, StreamableFile } from "@nest
 import { ApiTags } from "@nestjs/swagger";
 import { createReadStream } from "fs";
 import { RepositoriesService } from "./submodules/repositorios/services/repositories.service";
+import { ExportService } from './submodules/repositorios/services/export.service';
 
 
 @ApiTags('Ejercicio #4 Generar reporte CSV metricas de repositorio')
 @Controller('reporteria')
 export class MetricasReporteriaController {
-  constructor(private repositoriesService: RepositoriesService) { }
+  constructor(private repositoriesService: ExportService) { }
 
   @Get('export/:id')
   async getFile(@Param('id', ParseIntPipe) id: number,@Res({ passthrough: true }) res: Response): Promise<StreamableFile> {

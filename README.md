@@ -38,7 +38,7 @@ $ npm install
 
 Generara variables de entorno para conexion con base de datos cucharachaDB
 # En Windows
-set PORT=3001
+set PORT=3000
 set DB_USER=[user]
 set DB_PASSWORD=[pass]
 set DB_HOST=[urldatabase] 
@@ -54,7 +54,11 @@ $ export DB_PORT=[port]
 $ export DB_CLUSTER=[cluster]
 $ export DB_NAME=[namedb]
 
-# development
+#terminal 1
+npm run fake:api
+
+#terminal 2
+# development 
 $ npm run start
 
 # watch mode
