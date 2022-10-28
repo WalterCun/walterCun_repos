@@ -8,7 +8,7 @@ import { AdminOrgService } from 'src/modules/admin-org/admin-org.service';
 import printErrorNoFound from 'src/modules/control';
 
 @Injectable()
-export class TribesService {
+export class TribuService {
   constructor(
     @InjectRepository(Tribus) private tribeRepo:Repository<Tribus>,
     private organizationsService:AdminOrgService

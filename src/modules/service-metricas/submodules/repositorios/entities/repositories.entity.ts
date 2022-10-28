@@ -33,7 +33,6 @@ export class Repositorios {
   create_time: Date;
   
   @Column({ type: 'varchar', length: 1, default: estadosReg.ACTIVE })
-  //@Column({ type: "enum",enum: registerStates , default: registerStates.ACTIVE })
   status: estadosReg;
 
   @OneToOne(() => Metricas,(metrica) => metrica.repository)

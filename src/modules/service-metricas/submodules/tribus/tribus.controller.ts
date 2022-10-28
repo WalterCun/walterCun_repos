@@ -1,6 +1,6 @@
 import {  Controller,  Get,  Query,  Param,  Body,  Post,  Put,  Delete,  HttpCode,  HttpStatus, ParseIntPipe} from '@nestjs/common';
 
-import { TribesService } from './tribes.service';
+import { TribuService } from './tribes.service';
 import { CrearTribuDto, UpdateTribeDto } from './dtos/tribes.dto';
 import { ApiExcludeController, ApiTags } from '@nestjs/swagger';
 
@@ -8,7 +8,7 @@ import { ApiExcludeController, ApiTags } from '@nestjs/swagger';
 @ApiTags('CRUD - Tribus')
 @Controller('tribus')
 export class TribesController {
-  constructor(private tribesService: TribesService) { }
+  constructor(private tribesService: TribuService) { }
 
   @Get()
   getTribues() {
