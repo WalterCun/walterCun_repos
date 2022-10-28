@@ -1,6 +1,7 @@
 
 export default function printErrorNoFound(entity, number){
-    return `${entity} #${number} no fue encontrado`;
+    throw (`${entity} #${number} no fue encontrado`);
 }
 
+let csvExport: string = "informe-tribu-n${idTribu}.csv";
 

@@ -36,13 +36,15 @@ $ npm install
 
 ```bash
 
+Generara variables de entorno para conexion con base de datos cucharachaDB
 # En Windows
-$ set DB_USER=[user]
-$ set DB_PASSWORD=[pass]
-$ set DB_HOST=[urldatabase] 
-$ set DB_PORT=[port]
-$ set DB_CLUSTER=[cluster]
-$ set DB_NAME=[namedb]
+set PORT=3001
+set DB_USER=[user]
+set DB_PASSWORD=[pass]
+set DB_HOST=[urldatabase] 
+set DB_PORT=[port]
+set DB_CLUSTER=[cluster]
+set DB_NAME=[namedb]
 
 # En Linux
 $ export DB_USER=[user]
@@ -73,6 +75,49 @@ $ npm run test:e2e
 
 # test coverage
 $ npm run test:cov
+```
+
+## Data de Pruebas
+
+ORGANIZACION
+
+```
+{
+"name":"Banco Pichincha",
+"status":2
+}
+```
+
+
+TRUBU
+```
+{   
+  "name": "la tribu test",
+  "status": 2,
+  "idOrganization": 2
+}
+```
+
+REPOSITORIO
+```
+{
+  "tribeId":2,
+  "name":"repos tribu",
+  "state":"E",
+  "status":"A"
+}
+```
+
+METRICAS
+```
+{
+    "id_repository":1,
+    "coverage":50,
+    "bugs":200,
+    "vulnerabilities":300,
+    "hostpot":500,
+    "code_smells":600
+}
 ```
 
 ## Support

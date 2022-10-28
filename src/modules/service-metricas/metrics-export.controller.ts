@@ -13,11 +13,14 @@ export class MetricasReporteriaController {
 
   @Get('export/:id')
   async getFile(@Param('id', ParseIntPipe) id: number,@Res({ passthrough: true }) res: Response): Promise<StreamableFile> {
-    await this.repositoriesService.generateReport(id)
-    const file = createReadStream(join(process.cwd(), 'report.csv'));
+    // Crear fichero de datos CSV.
+    await this.repositoriesService.generateReport(id);
+    // Craer Stream de datos para descarga.
+    const file = createReadStream(join(process.cwd(), `informe-tribu-n${id}.csv`));
+    // Especificar el arvhico que se va a transmirir en la respuesta del enpoint
     res.set({
       'Content-Type': 'text/plain',
-      'Content-Disposition': 'attachment; filename="report.csv"',
+      'Content-Disposition': `attachment; filename="informe-tribu-n${id}.csv"`,
     });
     return new StreamableFile(file);
   }

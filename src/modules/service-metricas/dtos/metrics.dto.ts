@@ -2,38 +2,56 @@ import { IsNumber, IsNotEmpty, IsPositive, IsOptional, Max } from 'class-validat
 import { ApiProduces, ApiProperty, PartialType } from '@nestjs/swagger';
 
 export class CreateMetricsDto {
-  @ApiProperty()
+  @ApiProperty({
+    description: 'Identificacion del Repositorio',
+    required: true,
+  })
   @IsNotEmpty()
   @IsNumber()
   @IsPositive()
   readonly id_repository: number;
 
-  @ApiProperty()
+  @ApiProperty({
+    description: 'Covertura de los Repositorios',
+    required: true,
+  })
   @IsNotEmpty()
   @IsPositive()
   @IsOptional()
   @Max(100)
   readonly coverage: number;
 
-  @ApiProperty()
+  @ApiProperty({
+    description: 'Bugs de los Repositorios',
+    required: true,
+  })
   @IsNotEmpty()
   @IsNumber()
   @IsOptional()
   readonly bugs: number;
 
-  @ApiProperty()
+  @ApiProperty({
+    description: 'Vulnerabilidades de los Repositorios',
+    required: true,
+  })
   @IsNotEmpty()
   @IsNumber()
   @IsOptional()
   readonly vulnerabilities: number;
 
-  @ApiProperty()
+  @ApiProperty({
+    description: 'Hostpot de los Repositorios',
+    required: true,
+  })
   @IsNotEmpty()
   @IsNumber()
   @IsOptional()
   readonly hostpot: number;
 
-  @ApiProperty()
+  @ApiProperty({
+    description: 'Codigo de los Repositorios',
+    required: true,
+  })
   @IsNotEmpty()
   @IsNumber()
   @IsOptional()

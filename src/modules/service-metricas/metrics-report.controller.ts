@@ -11,7 +11,7 @@ export class RepositoriesMetricController {
   @Get('metricas/:tribuId')
   @HttpCode(HttpStatus.ACCEPTED)
   getMetrics(@Param('tribuId', ParseIntPipe) tribuId: number) {
-    return this.repositoriesService.getMetrics(tribuId);
+    return this.repositoriesService.getMetricas(tribuId);
   }
 
 }

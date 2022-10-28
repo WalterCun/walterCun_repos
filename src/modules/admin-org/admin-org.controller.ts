@@ -1,5 +1,5 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete, ParseIntPipe, Put } from '@nestjs/common';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiBody, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { AdminOrgService } from './admin-org.service';
 import { CreateAdminOrgDto, UpdateAdminOrgDto } from './dto/org.dto';
 
@@ -9,6 +9,8 @@ export class AdminOrgController {
   constructor(private readonly service: AdminOrgService) {}
 
   @Post('crear/')
+  @ApiBody({ type: CreateAdminOrgDto })
+  // @ApiResponse({status: 201, description: 'OK'})
   create(@Body() createAdminOrgDto: CreateAdminOrgDto) {
     return this.service.createNewOrg(createAdminOrgDto);
   }
